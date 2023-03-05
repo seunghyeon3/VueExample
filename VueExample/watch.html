@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>금지문자는 {{forbiddenText}}</p>
+        <textarea v-model="inputText"></textarea>
+    </div>
+
+    <script>
+        new Vue({
+            el:'#app',
+            data : {
+                forbiddenText : '안되',
+                inputText : '오늘은 날씨가 좋습니다.'
+            },
+            watch : {
+                inputText : function(){
+                    let pos = this.inputText.indexOf(this.forbiddenText);
+                    if(pos >= 0){
+                        alert(this.forbiddenText + "는 입력할 수 없습니다.")
+                        alert(pos)
+                        alert(this.inputText)
+                        //안되 입력하는 위치를 찾아서 삭제함.
+                        //그리고 substr(0, pos) 경우에는 시작부터 pos까지 짤라서 안되를 제외한 나머지 데이터를
+                        //inputText에 삽입.
+                        this.inputText = this.inputText.substr(0,pos)
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

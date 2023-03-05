@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vuehello2</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- Mustache 표기법 -->
+        <!-- <p>{{myText}}</p> -->
+        <!-- v-text 표기법 -->
+        <p v-text="myText"></p>
+        <!-- 2개 이상의 디렉티브 사용 -->
+        <!-- <p v-once,v-on:click="changeText">{{myText2}}</p>  -->
+        <!-- Mustache -->
+        <p  v-on:click="changeText">{{myText2}}</p>
+        <!-- v-text -->
+        <p v-text="myText2" v-on:click="changeText"></p> 
+        <!-- v-html -->
+        <p v-html="myText2" v-on:click="changeText"></p>
+    </div>
+
+    <script>
+        new Vue({
+            el : "#app", 
+            data : {
+                myText : 'Hello!!',
+                myText2 : 'v-text vs v-html'
+            },
+            methods : {
+                changeText : function(){
+                    this.myText2 = `<button v-on:click="addText" type="button">추가</button>`
+                },
+                // 아래 내용은 추후 진행 ( 2023 - 02 - 19 )
+                addText : function(){
+                    console.log('hi')
+                }
+            }
+        })
+        Vue.config.devtools = true;
+    </script>
+</body>
+</html>

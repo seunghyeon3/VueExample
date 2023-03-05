@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VueExample</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+</head>
+
+<body>
+    <div id="app">
+        <p>
+            {{hello}}
+        </p>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#app", //mount 할 dom 선택
+            data: {
+                hello: "hello Vue.js" //binding 해 줄 dom 변수 지정
+            },
+            //Vue Life Cycle 순서에 따라서 생성 되는 과정
+            beforeCreate: function () {
+                console.log("beforeCreate");
+            },
+            created: function () {
+                console.log("created");
+            },
+            mounted: function () {
+                console.log("mounted");
+                this.hello = "update Vue"
+            },
+            beforeUpdate: function () { //update 되는 부분이 없어서 실행되지 않음, 따라서 mount 실행 후 수정(변경)이 진행 되어야 함.
+                console.log("beforeupdate");
+            },
+            updated: function () {
+                console.log("updated");
+            }
+        })
+    </script>
+</body>
+
+</html>

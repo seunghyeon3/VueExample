@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input v-model="myName" placeholder="이름">
+        <p>{{myName}}</p>                            
+        <textarea v-model="myText"></textarea>
+        <p>{{myText}} 요긴 textarea</p>
+        <p>{{myText.length}} 요긴 textarea 길이</p>
+        <input type="checkbox" v-model="chk" value="y">
+        
+        <input type="checkbox" v-model="chk" value="N">
+        
+        <input type="checkbox" v-model="chk" value="Y">
+        <p>{{chk}} 상태입니다</p>
+
+        <label><input type="checkbox" v-model="myAgree">동의합니다.</label>
+        <button v-bind:disabled="myAgree==false">송신</button>
+
+        <label><input type="radio" value="red" v-model='picked'>적</label>
+        <label><input type="radio" value="green" v-model='picked'>노</label>
+        <label><input type="radio" value="blue" v-model='picked'>파</label>
+        <p v-text="picked"></p>
+
+        <select v-model="myColor">
+            <option value="" disabled>choose color</option>
+            <option>red</option>
+            <option>yello</option>
+            <option>blue</option>
+            <option>black</option>
+            <option>green</option>
+        </select>
+        <p>{{myColor}}</p>
+
+        <select v-model="myColor" multiple>
+            <option value="" disabled>choose color</option>
+            <option>red</option>
+            <option>yello</option>
+            <option>blue</option>
+            <option>black</option>
+            <option>green</option>
+        </select>
+        <p>{{myColor}}</p>
+
+        <input v-model.lazy="myText2">
+        <p>입력 후 표시 {{myText2}}</p>
+
+        <input v-model.number.lazy="myText2">
+        <p>입력 후 표시 {{100+myText2}}</p>
+    </div>
+    <script>
+        new Vue({
+            el:'#app',
+            data : {
+                myName : '',
+                myText : '',
+                chk : [],
+                myAgree : 'false',
+                picked :'red',
+                myColor : [],
+                myText2 :''
+            }
+        })
+    </script>
+</body>
+</html>

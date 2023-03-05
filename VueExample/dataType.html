@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dataTest</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+</head>
+<style>
+    *{
+        text-align: center;
+    }
+</style>
+<body>
+    
+    <div id="app">
+        <h1>데이터 출력</h1>
+        <p>{{myNumber}}</p>
+        <p>{{myText}}</p>
+        <p>{{myBool}}</p>
+
+        <h1>데이터 가공</h1>
+        <p>{{myPrice * 5}}</p>
+        <p>{{"안녕하세요" + myName + "님"}}</p>
+        <!-- String API는 JS 내용 그대로 사용 가능 -->
+        <!-- why? 어짜피 DOM 이기 때문에 -->
+        <h1>String</h1>
+        <p>{{myName.substr(0,1)}}</p>
+        <p>{{myName.charAt(1)}}</p>
+        <p>{{myName.indexOf('치')}}</p>
+        <p>{{myName.replace('김','이')}}</p>
+        <p>{{myName.split('또')}}</p>
+        <p>{{myName.length}}</p>
+        <!-- Array -->
+        <h1>Array</h1>
+        <p>{{myArray}}</p>
+        <p>{{myArray[0]}}</p>
+        <!-- OBJECT -->
+        <h1>Object</h1>
+        <p>{{myObject.name}} {{myObject.price}}</p>
+        <p>{{myTeaList}}</p>
+        <p>{{myTeaList[0].name}} {{myTeaList[0].price}}</p>
+        <!-- Vue Instance All Data  -->
+        <p>{{$data}}</p>
+        <hr>
+        <p>{{$data.myNumber}}</p>
+        <hr>
+        <h3>Vue Instance Data List Print</h3>
+        <li v-for = "(item, key) in $data">{{key}} : {{item}}</li> 
+    </div>
+    <script>
+        // Object data
+        const teaList = [
+        {name : '다즐링', price : 1000},
+        {name : '얼그레이', price : 2000},
+        {name : '루이보스', price : 3000}
+        ];
+
+        new Vue({
+            el: '#app',
+            data :{
+                myNumber : 12345,
+                myText : "Hello",
+                myBool : true,
+                myPrice : 500,
+                myName : '김또치',
+                myArray : ['다즐링', '얼그레이','루이보스'],
+                myObject : {
+                    name : '다즐링',
+                    price : 6000
+                },
+                myTeaList : teaList
+            }
+        })
+    </script>
+</body>
+</html>
