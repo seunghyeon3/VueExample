@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bindExample</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<style>
+    .strike-through{
+        text-decoration: line-through;
+        color: lightgray;
+    }
+    .dark{
+        background-color: gray;
+    }
+</style>
+<body>
+    <div id="app">
+        <a :href="myURL">네이버 접속</a>
+        <p v-bind:align ="myAlign">우로 정렬</p>
+        <p v-bind:style="{color : myColor}">style 적용</p>
+        <p v-bind:class="myClass">strike-thougth 로 구성</p>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data : {
+                myURL : 'https://www.naver.com',
+                myAlign : 'right',
+                myColor : 'red',
+                myClass : 'strike-through'
+                        }
+        })
+    </script>
+</body>
+</html>

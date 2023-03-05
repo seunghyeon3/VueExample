@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <input v-model.number="price" type="number">
+
+        <p>소비세 포함 금액{{taxIncluded}}원</p>
+
+        <input v-model="findWord">
+        <ul>
+            <li v-for="item in findItem">{{item}} </li>
+        </ul>
+
+        <p v-bind:style="{backgroundColor : mixColor}">{{mixColor}}</p>
+
+        <input type="range" v-model ="R" min="0" max = "255"><br>
+        <input type="range" v-model ="G" min="0" max = "255"><br>
+        <input type="range" v-model ="B" min="0" max = "255"><br>
+        
+    </div>
+
+    <script>
+        new Vue({
+            el : '#app',
+            data : {
+                price :100,
+                findWord:'',
+                items : ['설악산','한라산', '북한산', '백두산','지리산'],
+                R : 255,
+                G : 150,
+                B : 100
+            },
+            computed :{
+                taxIncluded : function(){
+                    return this.price * 1.08;
+                },
+                findItem : function(){
+                    if(this.findWord){ //입력한 값이 존재 한다면...
+                        return this.items.filter(function(value){
+                            return (value.indexOf(this.findWord) > -1)
+                            //indexof 값이 -1보다 크다 -> 해당 문자를 찾았다.
+                            //찾았다면... this(filter 중인 데이터를 반환 해줘라.)
+                        }, this);
+                    } else{
+                        return this.items;
+                    }
+                },
+                mixColor : function(){
+                    let ans = "RGB("+this.R+","+this.G+","+this.B+")";
+                    return ans;
+                }
+            }
+        })
+    </script>
+</body>
+</html>
