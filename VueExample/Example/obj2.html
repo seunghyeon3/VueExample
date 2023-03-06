@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10"></script>
+</head>
+<body>
+    <div id="app">
+        <p>{{myTea}}</p>
+        <p>{{myTea[0]}}, {{myTea[1]}}</p>
+    </div>
+</body>
+<script>
+    const teaArr = [
+    {name : '다즐링', price: 600},
+    {name : '헤이즐넛', price: 1000},
+    {name : '루이보스', price: 150},
+    ];
+    new Vue({
+        el : "#app",
+        data : {
+            myTea : teaArr
+        }
+    })
+</script>
+</html>

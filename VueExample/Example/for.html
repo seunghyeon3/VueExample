@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10"></script>
+<style>
+    table {
+        width:100%;
+        text-align : left;
+    }
+    table th {
+        padding : 12px;
+        border-bottom : 2px solid darkgray;
+    }
+    table td {
+        padding : 12px;
+    }
+    table tr:nth-of-type(even){
+        background-color: rgba(0,0,255,0.1);
+    }
+</style>
+</head>
+<body>
+    <div id="app">
+        <h3>관심 받고 있는 언어 랭킹</h3>
+        <table>
+            <thead>
+                <th v-for="item in header">{{item}}</th>
+            </thead>
+            <tbody>
+                <tr v-for="line in ranking">
+                    <td v-for="item in line">{{item}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="app2">
+        <ul>
+            <li v-for="item in myArray">{{item}}</li>
+        </ul>        
+
+        <button v-on:click="addList">맨 뒤에 추가</button>
+        <button v-on:click="addObj(3)">네번째에 추가</button>
+        <button v-on:click="changeObj(0)">첫번째를 변경</button>
+        <button v-on:click="deleteObj(1)">두번째를 삭제</button>
+    </div>
+    <div id="app3">
+        <ul>
+            <li v-for="item in myArray">{{item}}</li>
+        </ul>
+        <button v-on:click="sortData(myArray)">sort</button>
+    </div>
+    <div id="app4">
+        <ul>
+            <li v-for="item in myArray" v-if="item %2 == 0">{{item}}</li>
+        </ul>
+    </div>
+    <div id="app5">
+        <ul>
+            <li v-for ="item in myArray">{{item}}</li>
+        </ul>
+        <button v-on:click="evenData()">짝수만 표시</button>
+    </div>
+
+    <div id="app6">
+        <p>숫자 배열 조작과 구구단 출력</p> 
+        <ul>
+            <li v-for = "item in 10" v-if="item % 2 == 0">
+                {{item}}
+                <button v-on:click="change(item)">변경</button>
+                <button v-on:click="delete(item)">삭제</button>
+            </li>
+        </ul>
+        <button v-on:click="add()">추가</button>
+        <button v-on:click="sort()">정렬</button>
+        <button v-on:click="showData()">구구단 보이기</button>
+        
+        <div v-if="visiable">
+        <p v-for = "(item,index) in 9" v-bind="no">{{no}}*{{item}}={{no*item}} </p>
+        </div>
+    </div>
+    <script>
+        new Vue({
+            el:"#app6",
+            data :{
+                no : 0,
+                visiable : false
+            },
+            methods :{
+                change : function(index){
+                    this.no = index;
+                },
+                delete : function(index){
+                    this.no = 0;
+                },
+                showData:function(){
+                    return this.visiable == true ? this.visiable=false : this.visiable=true;
+                    }
+            }
+        })
+        new Vue({
+            el:"#app5",
+            data : {
+                myArray : [1,2,3,4,5,6]
+            },methods:{
+                evenData:function(){
+                    this.myArray = this.myArray.filter(
+                        function(value){
+                            return value %2 == 0;
+                        }
+                    );
+                    },
+                }
+            })
+        new Vue({
+            el:"#app4",
+            data :{
+                myArray :[1,2,3,4,5,6]
+            }
+        })
+        new Vue({
+            el:"#app3",
+            data :{
+                //myArray : ['one','two','three','four','five']
+                myArray : [5,4,3,2,1]
+            },
+            methods:{
+                sortData:function(listdata){
+                    listdata.sort(function(a,b){
+                        return a < b? -1 : 1;
+                    })
+                }
+            }
+        })
+        new Vue({
+            el:"#app2",
+            data :{
+                myArray:["첫번째", "두번째", "세번째", "네번째","다섯번째"]
+            },
+            methods:{
+                addList:function(){
+                    this.myArray.push("[맨뒤에 추가]");
+                },
+                addObj:function(index){
+                    this.myArray.splice(index, 0 , '[추가]');
+                },
+                changeObj:function(index){
+                    this.myArray.splice(index,1,'[변경]')
+                },
+                deleteObj:function(index){
+                    this.myArray.splice(index,1);
+                }
+            }
+        })
+        new Vue({
+            el:"#app",
+            data :{
+                header : ["프로그래밍 언어", 2018,2013,2008,2003,1998],
+                ranking : [
+                ['Java', 1,2,1,1,15],
+                ['C', 2,1,2,2,1],
+                ['C++', 3,4,3,3,2],
+                ['Python', 4,7,5,11,23],
+                ['JavaScript', 7,10,8,7,20]
+                ]
+                        }
+        })
+    </script>
+</body>
+</html>

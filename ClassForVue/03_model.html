@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <!-- myName의 이름이로 데이터 바인딩이 되어 서로 연결이 됨. -->
+    <div id="app">
+      <input v-model="myName" placeholder="이름" />
+      <p>나는 {{myName}} 입니다.</p>
+    </div>
+    <div id="app2">
+      <textarea v-model="myText"></textarea>
+      <p>문장은, {{myText}}</p>
+      <p>문자수는 {{myText.length}}</p>
+    </div>
+    <div id="app3">
+      <label>
+        <input type="checkbox" v-model="myCheck" value="red" /> 체크박스의
+        상태는 {{myCheck}}
+      </label>
+      <br />
+      <label>
+        <input type="checkbox" v-model="myCheck" value="green" /> 체크박스의
+        상태는 {{myCheck}}
+      </label>
+      <br />
+      <label>
+        <input type="checkbox" v-model="myCheck" value="blue" /> 체크박스의
+        상태는 {{myCheck}}
+      </label>
+      <br />
+      선택한 색은 {{myCheck}}
+    </div>
+    <br />
+    <div id="app4">
+      <label>
+        <input type="checkbox" v-model="myAgree" />
+        동의합니다.
+      </label>
+      <button v-bind:disabled="myAgree==false">송신</button>
+    </div>
+    <br />
+    <div id="app5">
+      <label>
+        <input type="radio" value="red" v-model="picked" />
+        적
+      </label>
+      <br />
+      <label>
+        <input type="radio" value="green" v-model="picked" />
+        녹
+      </label>
+      <br />
+      <label>
+        <input type="radio" value="blue" v-model="picked" />
+        청
+      </label>
+      <br />
+      {{picked}} 선택됨
+    </div>
+    <div id="app6">
+      <label>
+        <input type="radio" value="poppy.jpg" v-model="fileName" />
+        face1
+      </label>
+      <br />
+      <label>
+        <input type="radio" value="cat.jpg" v-model="fileName" />
+        face2
+      </label>
+      <br />
+      <p>{{fileName}} 선택</p>
+      <img v-bind:src="fileName" style="height: 300px" />
+    </div>
+    <div id="app7">
+      <select v-model="myColor" multiple style="width: 150px">
+        <option disabled value="">색을 선택해주세요.</option>
+        <option>red</option>
+        <option>green</option>
+        <option>blue</option>
+        <option>orange</option>
+        <option>brown</option>
+      </select>
+      <p v-bind:style="{color:myColor}">선택한 색상은 {{myColor}} 입니다.</p>
+    </div>
+
+    <!-- input tag에 데이터를 다 입력하고 나서 데이터 바인딩 시키는 방법 -->
+    <div id="app8">
+      <input v-model.lazy="myText" />
+      <p>입력 후 표시 {{myText}}</p>
+    </div>
+
+    <!-- v-model.number.lazy 가능함 -->
+    <div id="app9">
+      <input v-model.number="myNumber" type="number" />
+      <p>100을 더해서 표시 {{ 100+myNumber}}</p>
+      <input v-model="myNumber2" type="number" />
+      <p>100을 더해서 표시 {{ 100+myNumber2}}</p>
+    </div>
+    <div id="app10">
+      <input v-model.trim="myText" />
+      <p>앞뒤 공백을 제거{{myText}}</p>
+    </div>
+
+    <div id="app11">
+      <h1>입력폼 활용</h1>
+      이름 : <input v-model.lazy="myText" type="text" />
+      <br />
+      좋아하는 색은 :
+      <br />
+      <input type="radio" v-model="myColorText" value="red" />
+      빨강
+      <br />
+      <input type="radio" v-model="myColorText" value="green" /> 녹색
+      <br />
+      <input type="radio" v-model="myColorText" value="blue" /> 파랑
+      <br />
+      <input type="radio" v-model="myColorText" value="yello" /> 노랑
+      <br />
+      <input type="radio" v-model="myColorText" value="gray" /> 회색
+      <br />
+      <p>내 이름은 {{myText}} 이고 좋아하는 색은 {{myColorText}} 입니다.</p>
+    </div>
+    <script>
+      new Vue({
+        el: "#app",
+        data: {
+          myName: "12",
+        },
+      });
+
+      new Vue({
+        el: "#app2",
+        data: {
+          myText: "",
+        },
+      });
+
+      new Vue({
+        el: "#app3",
+        data: {
+          myCheck: [],
+        },
+      });
+      new Vue({
+        el: "#app4",
+        data: {
+          myAgree: false,
+        },
+      });
+      new Vue({
+        el: "#app5",
+        data: {
+          picked: "red",
+        },
+      });
+      new Vue({
+        el: "#app6",
+        data: {
+          fileName: "",
+        },
+      });
+      new Vue({
+        el: "#app7",
+        data: {
+          myColor: "",
+        },
+      });
+      new Vue({
+        el: "#app8",
+        data: {
+          myText: "",
+        },
+      });
+      new Vue({
+        el: "#app9",
+        data: {
+          myNumber: 0,
+          myNumber2: 0,
+        },
+      });
+      new Vue({
+        el: "#app10",
+        data: {
+          myText: "",
+        },
+      });
+      new Vue({
+        el: "#app11",
+        data: {
+          myText: "",
+          myColorText: "",
+        },
+      });
+    </script>
+  </body>
+</html>
