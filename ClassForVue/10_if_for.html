@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10"></script>
+</head>
+<body>
+    <div id="app">
+    <label><input type="checkbox" v-model="myVisible">표시</label>    
+    <p v-if="myVisible">체크박스 ON</p>
+    <button v-if="isShow" v-on:click="good">좋아</button>
+    <ul>
+        <li v-for="item in myArray">{{item.name}} 그리고 {{item.price}}</li>
+    </ul>
+    <ul>
+        <li v-for="n in 10">{{n}}*5 = {{n*5}}</li>
+    </ul>
+    <ul>
+        <li v-for="(item,index) in myArray">{{index}} : {{ item.name}}</li>
+    </ul>
+    </div>
+<script>
+new Vue({
+    el:"#app",
+    data:{
+        myVisible : false,
+        isShow : true,
+        myArray:[{name:"쨈빵", price:1000},{name:"메론빵", price:2000},{name:"크로와상", price:3000}]
+    },
+    methods:{
+        good:function(){
+            this.isShow = false
+        }
+    }
+})
+</script>
+</body>
+
+</html>

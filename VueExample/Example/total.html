@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10"></script>
+</head>
+<body>
+    <div id="app">
+        <p>{{myText}}</p>
+        <p>{{myHtml}}</p>
+    </div>
+    <div id="app2">
+        <p>{{myArray}}</p>
+    </div>
+    <div id="app3">
+        <p>{{myClass}}</p>
+        <p>{{myClass[0]}}</p>
+        <p>{{myClass[1].name}}의 달러 환율은 {{myClass[1].ratio}}이고 100달러는 {{myClass[1].ratio}}*100 입니다.</p>
+    </div>
+</body>
+<script>
+    new Vue({
+        el : "#app",
+        data :{
+            myText : "hello",
+            myHtml : "<h1>hello</h1>"
+        }
+    })
+    new Vue({
+        el:"#app2",
+        data : {
+            myArray : [1,2,3,4,5]
+        }
+    })
+    new Vue({
+        el:"#app3",
+        data :{
+            myClass : [
+            {name:"dollar", ratio : 1},
+            {name:"won", ratio : 1395.4},
+            {name:"euro", ratio : 875.4},
+            ]
+        }
+    })
+</script>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>다양한 데이터의 출력</h1>
+        <p v-text="myText"></p>
+        <p v-html="myHtmlText"></p>
+        <p>숫자 {{myNum}}</p>
+        <p>부울형 {{myBool}}</p>
+        <p>배열 {{myArray}}</p>
+        <p>오브젝트 {{myObj}}</p>
+        <p>{"myText" : {{myText}} , "myHtmlText" : {{myHtmlText}}, "myNum" : {{myNum}}, "myBool" : {{myBool}} , "myArray" : {{myArray}} , 
+            "myObj" : {{myObj}}}
+        </p>
+    </div>
+    <script>
+        new Vue({
+            el:"#app",
+            data : {
+                myText : "<h3>태그를 넣어서 출력할 수도 있습니다.</h3>",
+                myHtmlText : "<h3>태그를 넣어서 출력할 수도 있습니다.</h3>",
+                myNum : 12345,
+                myBool : false,
+                myArray : [1,2,3,4,5],
+                myObj :[
+                {name:"다즐링", price:600},
+                {name:"얼그레이", price:500},
+                {name:"실론", price:800}
+                ]
+            }
+        })
+    </script>
+</body>
+</html>
