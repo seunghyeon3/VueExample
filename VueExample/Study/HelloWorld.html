@@ -14,6 +14,8 @@
         <p>
             {{hello}}
         </p>
+
+        <button type="button" @click="changeValue">변경</button>
     </div>
 
     <script>
@@ -38,6 +40,11 @@
             },
             updated: function () {
                 console.log("updated");
+            },
+            methods : {
+                changeValue(){
+                    this.hello = "test"
+                }
             }
         })
     </script>

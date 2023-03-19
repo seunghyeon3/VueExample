@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        * {
+            font-weight: bold;
+        }
+        html {
+            width: 90%;
+            margin-right: auto;
+            margin-left: auto;
+            margin-top: 4vh;
+            font-family: sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        button {
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: 6px;
+            color: #fff;
+            border: 2px;
+            background-color: #007bff;
+        }
+
+        input {
+            margin-bottom: 10px;
+            padding: 6px 12px;
+            border-radius: 6px;
+            color: #495057;
+            border: 2px solid #ced4da;
+        }
+
+        h1 {
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <h1>좀더 좋아진 ToDo리스트</h1>
+    <div id="app">
+        <div v-for="(todo, index) in todos">
+            <label>
+                <div style="display: inline-block; width: 21vw;" >
+                    <input type="checkbox" v-model="todo.done">
+                    <span v-bind:class="{donestyle:todo.done}">{{todo.text}}</span>
+                    <span v-bind:class="{donestyle:todo.done}">( 완료일 {{todo.DueDate}} )</span>
+                </div>
+                <button v-on:click="extendDate(index)">완료일 연장</button>
+            </label>
+        </div>
+
+        <input type="text" v-model.trim="addtext" v-on:keyup.enter="addToDo" placeholder="할일">
+        /
+        <input type="text" v-model.trim="dueDate" v-on:keyup.enter="addToDo" placeholder="완료일"> (YYYYMMDD 형식으로 입력)
+        <p>
+            <button v-on:click="cleanToDo">처리완료삭제</button>
+            <button v-on:click="sortData('todo')">할일순으로 정렬</button>
+            <button v-on:click="sortData('date')">완료일로 정렬</button>
+        </p>
+
+        <p>{{ todos.length }}건 중 {{ remaining }}건 처리, {{overdate}} 완료일 지남
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                addtext: '',
+                dueDate: '',
+                todos: [{
+                        done: false,
+                        text: '빵사기',
+                        DueDate: "20230310"
+                    },
+                    {
+                        done: false,
+                        text: '커피사기',
+                        DueDate: "20230411"
+                    },
+                    {
+                        done: false,
+                        text: '공부하기',
+                        DueDate: "20230323"
+                    },
+                    {
+                        done: false,
+                        text: '놀기',
+                        DueDate: "20230422"
+                    },
+                    {
+                        done: false,
+                        text: '영화보기',
+                        DueDate: "20221231"
+                    },
+                ]
+            },
+            computed: {
+                remaining: function () {
+                    return this.todos.filter(function (val) {
+                        return val.done == true;
+                    }).length;
+                },
+                overdate: function () {
+                    return this.todos.filter(function (val) {
+                        var date = new Date();
+                        var year = date.getFullYear();
+                        var month = new String(date.getMonth() + 1);
+                        var day = new String(date.getDate());
+                        if (month.length == 1) month = "0" + month;
+                        if (day.length == 1) day = "0" + day;
+                        var due_date = year + month + day;
+                        return val.DueDate < due_date;
+                    }).length;
+                }
+            },
+            methods: {
+                addToDo: function () {
+                    if (this.addtext) {
+                        var due_date = this.dueDate;
+                        if (this.dueDate == "") {
+                            var date = new Date();
+                            date = new Date(Date.parse(date) + 1 * 1000 * 60 * 60 * 24);
+
+                            var year = date.getFullYear();
+                            var month = String(date.getMonth() + 1);
+                            var day = String(date.getDate());
+                            if (month.length == 1) month = "0" + month;
+                            if (day.length == 1) day = "0" + day;
+                            due_date = year + month + day;
+                            console.log(due_date)
+                        }
+                        this.todos.push({
+                            done: false,
+                            text: this.addtext,
+                            DueDate: due_date
+                        });
+                        this.addtext = '';
+                    }
+                },
+                cleanToDo: function () {
+                    this.todos = this.todos.filter(function (val) {
+                        return val.done == false;
+                    })
+                },
+                extendDate: function (index) {
+                    var str_date = this.todos[index].DueDate;
+                    //각 년월일 받아와서 Date에 넣어서 날짜를 생성하기 위해서 자름
+                    var y = str_date.substr(0, 4);
+                    var m = str_date.substr(4, 2);
+                    var d = str_date.substr(6, 2);
+
+                    var date = new Date(Date.parse(new Date(y, m - 1, d)) + 1 * 1000 * 60 * 60 * 24);
+                    console.log(date)
+                    var year = date.getFullYear();
+                    var month = String(date.getMonth() + 1);
+                    var day = String(date.getDate());
+                    if (month.length == 1) month = "0" + month;
+                    if (day.length == 1) day = "0" + day;
+                    var due_date = year + month + day;
+
+                    this.todos[index].DueDate = due_date;
+                },
+                sortData: function (type) {
+                    if (type == "todo") {
+                        this.todos.sort(function (a, b) {
+                            console.log(a.text);
+                            console.log(b.text);
+                            console.log((a.text < b.text ? -1 : 1));
+                            //오름차순 정렬
+                            return (a.text < b.text ? -1 : 1);
+                        });
+                    } else {
+                        this.todos.sort(function (a, b) {
+                            //오름차순 정렬
+                            return (a.DueDate < b.DueDate ? -1 : 1);
+                        });
+                    }
+                },
+
+            }
+        })
+    </script>
+
+    <style>
+        .donestyle {
+            text-decoration: line-through;
+            color: lightgray;
+        }
+    </style>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.13/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p v-for="(item,i) in dataArray" :key="i">
+            <span v-if="item.pm10 < 90">
+                {{item.pm10}}  / 좋다
+            </span>
+            <span v-else>
+                나쁘다
+            </span>
+        </p>
+    </div>
+    <script>
+        new Vue({
+            el : '#app',
+            data : {
+                dataArray : [
+                {pm10 : 30, pm25:100},
+                {pm10 : 20, pm25:100},
+                {pm10 : 1, pm25:10},
+                {pm10 : 10, pm25:10},
+                ]
+            },
+            
+        })
+    </script>
+</body>
+</html>
