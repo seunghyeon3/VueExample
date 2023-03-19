@@ -1,0 +1,75 @@
+@charset "UTF-8";
+
+@font-face {
+	font-family: 'yg-jalnan';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+*{
+	font-family: 'yg-jalnan';
+	font-size: x-large;
+}
+html {
+	width: 80%;
+	margin-right: auto;
+	margin-left: auto;
+
+	line-height: 1.5;
+}
+
+
+button {
+	cursor: pointer;
+	padding: 6px 12px;
+	border-radius: 6px;
+	color: #fff;
+	border: 2px;
+	background-color: #007bff;
+	transition: background-color .2s
+}
+button:hover {
+	background-color: #0069d9;
+}
+button:active {
+	background-color: #003c7c;
+}
+button:disabled {
+	opacity: .5;
+	pointer-events: none;
+}
+#list {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+#list td, #list th {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+
+#list tr:nth-child(even){background-color: #f2f2f2;}
+
+#list tr:hover {
+	background-color: #ddd;
+	cursor: pointer;
+}
+
+#list th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	background-color: #4CAF50;
+	color: white;
+}
+
+#list td {
+	text-align: center;
+}
+
+ul li {
+	margin: 15px;
+}
+
+span {
+	margin-right: 20px;
+}

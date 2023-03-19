@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.13/dist/vue.js"></script>
+</head>
+<body>
+    <h1>컴포넌트를 숫자로 출력</h1>
+   <div id="app">
+    <my-component v-for="(item, index) in myArray" :my-name="item"></my-component>
+   </div> 
+   <script>
+    const myComponent = {
+        template : `<p class="my-comp">{{myText}}</p>`,
+        props : ['myName'],
+        created : function(){
+            if(this.myName % 2 == 0){
+                this.myText = this.myName + '짝수 입니다.'
+            }else {
+                this.myText = this.myName + '홀수 입니다.'
+            }
+        }
+    }
+
+    new Vue({
+        el : '#app',
+        data : {
+            myArray : [1,2,3,4,5,6,7,8,9,10]
+        },
+        components : {
+            'my-component' : myComponent
+        }
+    })
+   </script>
+</body>
+</html>
